@@ -33,16 +33,16 @@ class CartController extends Controller
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->DeleteItemCart($id);
-        if(Count($newCart->products) > 0 ){
-            $req -> Session()->put('Cart', $newCart);
-        }
-        else {
-            $req -> Session()->forget('Cart');
+        if (Count($newCart->products) > 0) {
+            $req->Session()->put('Cart', $newCart);
+        } else {
+            $req->Session()->forget('Cart');
         }
         return view('cart');
     }
 
-    public function ViewListCart() {
+    public function ViewListCart()
+    {
         return view('list');
     }
 
@@ -52,26 +52,32 @@ class CartController extends Controller
         $newCart = new Cart($oldCart);
         $newCart->DeleteItemCart($id);
 
-        if(Count($newCart->products) > 0 ){
-            $req -> Session()->put('Cart', $newCart);
-        }
-        else {
-            $req -> Session()->forget('Cart');
+        if (Count($newCart->products) > 0) {
+            $req->Session()->put('Cart', $newCart);
+        } else {
+            $req->Session()->forget('Cart');
         }
         return view('list-cart');
     }
 
-    public function SaveListItemCart(Request $req, $id, $quanty) {
+    public function SaveListItemCart(Request $req, $id, $quanty)
+    {
         $oldCart = Session('Cart') ? Session('Cart') : null;
         $newCart = new Cart($oldCart);
         $newCart->UpdateItemCart($id, $quanty);
 
-        if(Count($newCart->products) > 0 ){
-            $req -> Session()->put('Cart', $newCart);
-        }
-        else {
-            $req -> Session()->forget('Cart');
+        if (Count($newCart->products) > 0) {
+            $req->Session()->put('Cart', $newCart);
+        } else {
+            $req->Session()->forget('Cart');
         }
         return view('list-cart');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where('name', 'like', "%$query%")->get();
+        return view('search')->with('products', $products);
     }
 }

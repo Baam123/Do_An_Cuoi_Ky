@@ -7,20 +7,25 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-    public function index() {
-        
+    public function index()
+    {
+
         return view('Home.index');
     }
-    public function shop() {
+    public function shop()
+    {
         return view('Home.shop');
     }
-    public function why() {
+    public function why()
+    {
         return view('Home.why');
     }
-    public function testimonial() {
+    public function testimonial()
+    {
         return view('Home.testimonial');
     }
-    public function contact() {
+    public function contact()
+    {
         return view('contact');
     }
 }
